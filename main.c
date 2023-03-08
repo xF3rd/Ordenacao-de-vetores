@@ -97,6 +97,32 @@ int BuscaSequencial(int *vetor, int tamanho, int item)
     return -1;
 }
 //============================================================================================================================
+int BuscaBinaria(int *vetor, int tamanho, int item)
+{
+    int comeco = 0;
+    int fim = tamanho - 1;
+
+    while (comeco <= fim)
+    {
+        int i = comeco + (fim - comeco) / 2;
+
+        if (*(vetor + i) == item)
+        {
+            return i;
+        }
+        if (*(vetor + i) < item)
+        {
+            comeco = i + 1;
+        }
+        else
+        {
+            fim = i - 1;
+        }
+    }
+
+    return -1;
+}
+//============================================================================================================================
 
 int main(){
     int indice, item1, item2, item3, item4, item5, tam1, tam2, tam3, tam4, tam5, *seq1, *seq2, *seq3, *seq4, *seq5, *seq1_copy, *seq2_copy, *seq3_copy, *seq4_copy, *seq5_copy;
@@ -178,6 +204,123 @@ int main(){
     {
         *(seq5_copy + i) = *(seq5 + i);
     }
+    //============================================================================================================================
+    printf("==============================================================================================================\n");
+    start = clock();
+    Bubble_Sort(seq1, tam1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 1 com Bubble Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq1, seq1_copy, tam1);
+    //====================================================
+    start = clock();
+    Insertion_Sort(seq1, tam1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 1 com Insertion Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq1, seq1_copy, tam1);
+    //====================================================
+    start = clock();
+    Quick_Sort(seq1, 0, tam1 - 1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 1 com Quick Sort: %f segundos\n", time_spent);
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    Bubble_Sort(seq2, tam2);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 2 com Bubble Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq2, seq2_copy, tam2);
+    //====================================================
+    start = clock();
+    Insertion_Sort(seq2, tam2);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 2 com Insertion Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq2, seq2_copy, tam2);
+    //====================================================
+    start = clock();
+    Quick_Sort(seq2, 0, tam2 - 1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 2 com Quick Sort: %f segundos\n", time_spent);
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    Bubble_Sort(seq3, tam3);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 3 com Bubble Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq3, seq3_copy, tam3);
+    //====================================================
+    start = clock();
+    Insertion_Sort(seq3, tam3);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 3 com Insertion Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq3, seq3_copy, tam3);
+    //====================================================
+    start = clock();
+    Quick_Sort(seq3, 0, tam3 - 1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 3 com Quick Sort: %f segundos\n", time_spent);
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    Bubble_Sort(seq4, tam4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 4 com Bubble Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq4, seq4_copy, tam4);
+    //====================================================
+    start = clock();
+    Insertion_Sort(seq4, tam4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 4 com Insertion Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq4, seq4_copy, tam4);
+    //====================================================
+    start = clock();
+    Quick_Sort(seq4, 0, tam4 - 1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 4 com Quick Sort: %f segundos\n", time_spent);
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    Bubble_Sort(seq5, tam5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 5 com Bubble Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq5, seq5_copy, tam5);
+    //====================================================
+    start = clock();
+    Insertion_Sort(seq5, tam5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 5 com Insertion Sort: %f segundos\n", time_spent);
+    //====================================================
+    inverte(seq5, seq5_copy, tam5);
+    //====================================================
+    start = clock();
+    Quick_Sort(seq5, 0, tam5 - 1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de ordenacao da sequencia 5 com Quick Sort: %f segundos\n", time_spent);
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
 
     return 0;
 }

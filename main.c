@@ -2,6 +2,66 @@
 #include <stdlib.h>
 #include <time.h>
 
+//============================================================================================================================
+void Bubble_Sort(int vetor[], int tam)
+{
+    int aux;
+    for (int i = tam - 1; i >= 1; i--)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (vetor[j] > vetor[j + 1])
+            {
+                aux = vetor[j];
+                vetor[j] = vetor[j + 1];
+                vetor[j + 1] = aux;
+            }
+        }
+    }
+}
+//============================================================================================================================
+void troca(int *vetor, int i, int j)
+{
+    int aux = vetor[i];
+    vetor[i] = vetor[j];
+    vetor[j] = aux;
+}
+//====================================================
+int particiona(int *vetor, int inicio, int fim)
+{
+    int pivo, pivo_indice, i;
+    pivo = vetor[fim];
+    pivo_indice = inicio;
+    for (i = inicio; i < fim; i++)
+    {
+        if (vetor[i] <= pivo)
+        {
+            troca(vetor, i, pivo_indice);
+            pivo_indice++;
+        }
+    }
+    troca(vetor, pivo_indice, fim);
+    return pivo_indice;
+}
+//====================================================
+int particiona_random(int *vetor, int inicio, int fim)
+{
+    int pivo_indice = (rand() % (fim - inicio + 1)) + inicio;
+    troca(vetor, pivo_indice, fim);
+    return particiona(vetor, inicio, fim);
+}
+//====================================================
+void Quick_Sort(int *vetor, int inicio, int fim)
+{
+    if (inicio < fim)
+    {
+        int pivo_indice = particiona_random(vetor, inicio, fim);
+        Quick_Sort(vetor, inicio, pivo_indice - 1);
+        Quick_Sort(vetor, pivo_indice + 1, fim);
+    }
+}
+//============================================================================================================================
+
 int main(){
     int indice, item1, item2, item3, item4, item5, tam1, tam2, tam3, tam4, tam5, *seq1, *seq2, *seq3, *seq4, *seq5, *seq1_copy, *seq2_copy, *seq3_copy, *seq4_copy, *seq5_copy;
     clock_t start, end;

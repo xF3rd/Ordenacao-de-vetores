@@ -14,3 +14,5 @@
 #### Ra:21003071
 ### Nathan Rocha Gardin 
 #### Ra:21008193
+### Rafael Fatol Lopes 
+#### RA: 21013400

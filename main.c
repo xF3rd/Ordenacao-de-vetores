@@ -321,6 +321,81 @@ int main(){
     printf("Tempo de ordenacao da sequencia 5 com Quick Sort: %f segundos\n", time_spent);
     printf("==============================================================================================================\n");
     //============================================================================================================================
+    printf("Digite um numero para ser procurado na sequencia 1: ");
+    scanf("%d", &item1);
+    printf("Digite um numero para ser procurado na sequencia 2: ");
+    scanf("%d", &item2);
+    printf("Digite um numero para ser procurado na sequencia 3: ");
+    scanf("%d", &item3);
+    printf("Digite um numero para ser procurado na sequencia 4: ");
+    scanf("%d", &item4);
+    printf("Digite um numero para ser procurado na sequencia 5: ");
+    scanf("%d", &item5);
+    printf("==============================================================================================================\n");
+    //====================================================
+    start = clock();
+    indice = BuscaSequencial(seq1, tam1, item1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 1 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq1, tam1, item1);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 1 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    indice = BuscaSequencial(seq2, tam2, item2);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 2 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq2, tam2, item2);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 2 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    indice = BuscaSequencial(seq3, tam3, item3);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 3 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq3, tam3, item3);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 3 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
 
     return 0;
 }

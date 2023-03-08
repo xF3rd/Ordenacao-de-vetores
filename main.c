@@ -396,6 +396,48 @@ int main(){
     }
     printf("==============================================================================================================\n");
     //============================================================================================================================
+    start = clock();
+    indice = BuscaSequencial(seq4, tam4, item4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 4 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq4, tam4, item4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 4 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    indice = BuscaSequencial(seq5, tam5, item5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 5 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq5, tam5, item5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 5 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //====================================================
 
     return 0;
 }

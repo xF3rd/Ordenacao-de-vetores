@@ -20,6 +20,21 @@ void Bubble_Sort(int vetor[], int tam)
     }
 }
 //============================================================================================================================
+void Insertion_Sort(int vetor[], int tam)
+{
+    for (int i = 1; i < tam; i++)
+    {
+        int tmp = vetor[i];
+        int j = i - 1;
+        while (j >= 0 && vetor[j] > tmp)
+        {
+            vetor[j + 1] = vetor[j];
+            j--;
+        }
+        vetor[j + 1] = tmp;
+    }
+}
+//============================================================================================================================
 void troca(int *vetor, int i, int j)
 {
     int aux = vetor[i];
@@ -59,6 +74,27 @@ void Quick_Sort(int *vetor, int inicio, int fim)
         Quick_Sort(vetor, inicio, pivo_indice - 1);
         Quick_Sort(vetor, pivo_indice + 1, fim);
     }
+}
+//============================================================================================================================
+void inverte(int *vetor, int *copia, int tamanho)
+{
+    for (int i = 0; i < tamanho; i++)
+    {
+        *(vetor + i) = *(copia + i);
+    }
+}
+//============================================================================================================================
+int BuscaSequencial(int *vetor, int tamanho, int item)
+{
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (*(vetor + i) == item)
+        {
+            return i;
+        }
+    }
+    printf("Item nao encontrado\n");
+    return -1;
 }
 //============================================================================================================================
 

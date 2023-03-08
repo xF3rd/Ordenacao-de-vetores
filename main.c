@@ -123,8 +123,8 @@ int BuscaBinaria(int *vetor, int tamanho, int item)
     return -1;
 }
 //============================================================================================================================
-
-int main(){
+int main()
+{
     int indice, item1, item2, item3, item4, item5, tam1, tam2, tam3, tam4, tam5, *seq1, *seq2, *seq3, *seq4, *seq5, *seq1_copy, *seq2_copy, *seq3_copy, *seq4_copy, *seq5_copy;
     clock_t start, end;
     double time_spent;
@@ -396,6 +396,58 @@ int main(){
     }
     printf("==============================================================================================================\n");
     //============================================================================================================================
-
+    start = clock();
+    indice = BuscaSequencial(seq4, tam4, item4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 4 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq4, tam4, item4);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 4 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //============================================================================================================================
+    start = clock();
+    indice = BuscaSequencial(seq5, tam5, item5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 5 com Busca Sequencial: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    //====================================================
+    start = clock();
+    indice = BuscaBinaria(seq5, tam5, item5);
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Tempo de busca na sequencia 5 com Busca Binaria: %f segundos\n", time_spent);
+    if (indice != -1)
+    {
+        printf("INDICE: %d\n", indice + 1);
+    }
+    printf("==============================================================================================================\n");
+    //====================================================
+    free(seq1);
+    free(seq2);
+    free(seq3);
+    free(seq4);
+    free(seq5);
+    free(seq1_copy);
+    free(seq2_copy);
+    free(seq3_copy);
+    free(seq4_copy);
+    free(seq5_copy);
+    //====================================================
     return 0;
 }

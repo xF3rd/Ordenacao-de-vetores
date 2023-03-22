@@ -1,24 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
 //============================================================================================================================
 void Bubble_Sort(int vetor[], int tam)
 {
     int aux;
-    for (int i = tam - 1; i >= 1; i--)
+    for (int i = tam - 1; i > 0; i--) 
     {
-        for (int j = 0; j < i; j++)
+        for (int j = 0; j < i; j++) 
         {
-            if (vetor[j] > vetor[j + 1])
+            if (vetor[j] > vetor[j + 1]) 
             {
-                aux = vetor[j];
+                aux = vetor[j]; //Ocorre a troca
                 vetor[j] = vetor[j + 1];
                 vetor[j + 1] = aux;
             }
         }
     }
-}
+} 
 //============================================================================================================================
 void Insertion_Sort(int vetor[], int tam)
 {
@@ -93,7 +92,6 @@ int BuscaSequencial(int *vetor, int tamanho, int item)
             return i;
         }
     }
-    printf("Item nao encontrado\n");
     return -1;
 }
 //============================================================================================================================
@@ -119,15 +117,78 @@ int BuscaBinaria(int *vetor, int tamanho, int item)
             fim = i - 1;
         }
     }
-
     return -1;
+}
+//============================================================================================================================
+void rando(int *vet, int tam, int *vet_copy)
+{
+    for (int i = 0; i < tam; i++)
+    {
+        *(vet + i) = 20 + (1999.98 * (rand() % 1000));
+    }
+    for (int i = 0; i < tam; i++)
+    {
+        *(vet_copy + i) = *(vet + i);
+    }
+}
+//============================================================================================================================
+void medeOrdenar(int *vet, int tam, int op){
+    clock_t start, end;
+    double time_spent;
+    start = clock();
+    if(op == 1){
+        Bubble_Sort(vet, tam);
+    }else if(op == 2){
+        Insertion_Sort(vet, tam);
+    }else{
+        Quick_Sort(vet, 0, tam - 1);
+    }
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    if (op == 1)
+    {
+        printf("||  %f segundos   ||", time_spent);
+    }
+    else if (op == 2)
+    {
+        printf("    %f segundos    ||", time_spent);
+    }
+    else
+    {
+        printf("  %f segundos  ||", time_spent);
+    }
+}
+//============================================================================================================================
+void medeBusca(int *vet, int tam, int op, int item){
+    clock_t start, end;
+    double time_spent;
+    int indice;
+    start = clock();
+    if(op == 1){
+        indice = BuscaSequencial(vet, tam, item);
+    }else{
+        indice = BuscaBinaria(vet, tam, item);
+    }
+    end = clock();
+    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    if (op == 1)
+    {
+        printf("    %f segundos     ||", time_spent);
+    }
+    else
+    {
+        printf("   %f segundos   ||", time_spent);
+        if(indice == -1){
+            printf("Item nao encontrado");
+        }else{
+                printf("INDICE: %d", indice + 1);
+        }
+    }
 }
 //============================================================================================================================
 int main()
 {
-    int indice, item1, item2, item3, item4, item5, tam1, tam2, tam3, tam4, tam5, *seq1, *seq2, *seq3, *seq4, *seq5, *seq1_copy, *seq2_copy, *seq3_copy, *seq4_copy, *seq5_copy;
-    clock_t start, end;
-    double time_spent;
+    int item1, item2, item3, item4, item5, tam1, tam2, tam3, tam4, tam5, *seq1, *seq2, *seq3, *seq4, *seq5, *seq1_copy, *seq2_copy, *seq3_copy, *seq4_copy, *seq5_copy;
     //====================================================
     srand((unsigned)time(NULL));
     tam1 = 10000 + (1000 * (rand() % 990));
@@ -136,18 +197,11 @@ int main()
     tam4 = 10000 + (1000 * (rand() % 990));
     tam5 = 10000 + (1000 * (rand() % 990));
     //====================================================
-    printf("==============================================================================================================\n");
-    printf("O tamanho da sequencia 1 e: %d\n", tam1);
-    printf("O tamanho da sequencia 2 e: %d\n", tam2);
-    printf("O tamanho da sequencia 3 e: %d\n", tam3);
-    printf("O tamanho da sequencia 4 e: %d\n", tam4);
-    printf("O tamanho da sequencia 5 e: %d\n", tam5);
-    //====================================================
-    /*tam1 = 10000;
-    tam2 = 10000;
-    tam3 = 10000;
-    tam4 = 10000;
-    tam5 = 10000;*/
+    tam1 = 50000;
+    tam2 = 50000;
+    tam3 = 50000;
+    tam4 = 50000;
+    tam5 = 50000;
     seq1 = malloc(tam1 * sizeof(int));
     seq2 = malloc(tam2 * sizeof(int));
     seq3 = malloc(tam3 * sizeof(int));
@@ -159,296 +213,98 @@ int main()
     seq4_copy = malloc(tam5 * sizeof(int));
     seq5_copy = malloc(tam5 * sizeof(int));
     //====================================================
-    srand((unsigned)time(NULL));
-    for (int i = 0; i < tam1; i++)
-    {
-        *(seq1 + i) = 20 + (1999.98 * (rand() % 1000));
-    }
-    for (int i = 0; i < tam1; i++)
-    {
-        *(seq1_copy + i) = *(seq1 + i);
-    }
-    //====================================================
-    for (int i = 0; i < tam2; i++)
-    {
-        *(seq2 + i) = 20 + (1999.98 * (rand() % 1000));
-    }
-    for (int i = 0; i < tam2; i++)
-    {
-        *(seq2_copy + i) = *(seq2 + i);
-    }
-    //====================================================
-    for (int i = 0; i < tam3; i++)
-    {
-        *(seq3 + i) = 20 + (1999.98 * (rand() % 1000));
-    }
-    for (int i = 0; i < tam3; i++)
-    {
-        *(seq3_copy + i) = *(seq3 + i);
-    }
-    //====================================================
-    for (int i = 0; i < tam4; i++)
-    {
-        *(seq4 + i) = 20 + (1999.98 * (rand() % 1000));
-    }
-    for (int i = 0; i < tam4; i++)
-    {
-        *(seq4_copy + i) = *(seq4 + i);
-    }
-    //====================================================
-    for (int i = 0; i < tam5; i++)
-    {
-        *(seq5 + i) = 20 + (1999.98 * (rand() % 1000));
-    }
-    for (int i = 0; i < tam5; i++)
-    {
-        *(seq5_copy + i) = *(seq5 + i);
-    }
+    rando(seq1, tam1, seq1_copy);
+    rando(seq2, tam2, seq2_copy);
+    rando(seq3, tam3, seq3_copy);
+    rando(seq4, tam4, seq4_copy);
+    rando(seq5, tam5, seq5_copy);
     //============================================================================================================================
-    printf("==============================================================================================================\n");
-    start = clock();
-    Bubble_Sort(seq1, tam1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 1 com Bubble Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq1, seq1_copy, tam1);
-    //====================================================
-    start = clock();
-    Insertion_Sort(seq1, tam1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 1 com Insertion Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq1, seq1_copy, tam1);
-    //====================================================
-    start = clock();
-    Quick_Sort(seq1, 0, tam1 - 1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 1 com Quick Sort: %f segundos\n", time_spent);
-    printf("==============================================================================================================\n");
-    //============================================================================================================================
-    start = clock();
-    Bubble_Sort(seq2, tam2);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 2 com Bubble Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq2, seq2_copy, tam2);
-    //====================================================
-    start = clock();
-    Insertion_Sort(seq2, tam2);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 2 com Insertion Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq2, seq2_copy, tam2);
-    //====================================================
-    start = clock();
-    Quick_Sort(seq2, 0, tam2 - 1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 2 com Quick Sort: %f segundos\n", time_spent);
-    printf("==============================================================================================================\n");
-    //============================================================================================================================
-    start = clock();
-    Bubble_Sort(seq3, tam3);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 3 com Bubble Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq3, seq3_copy, tam3);
-    //====================================================
-    start = clock();
-    Insertion_Sort(seq3, tam3);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 3 com Insertion Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq3, seq3_copy, tam3);
-    //====================================================
-    start = clock();
-    Quick_Sort(seq3, 0, tam3 - 1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 3 com Quick Sort: %f segundos\n", time_spent);
-    printf("==============================================================================================================\n");
-    //============================================================================================================================
-    start = clock();
-    Bubble_Sort(seq4, tam4);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 4 com Bubble Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq4, seq4_copy, tam4);
-    //====================================================
-    start = clock();
-    Insertion_Sort(seq4, tam4);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 4 com Insertion Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq4, seq4_copy, tam4);
-    //====================================================
-    start = clock();
-    Quick_Sort(seq4, 0, tam4 - 1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 4 com Quick Sort: %f segundos\n", time_spent);
-    printf("==============================================================================================================\n");
-    //============================================================================================================================
-    start = clock();
-    Bubble_Sort(seq5, tam5);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 5 com Bubble Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq5, seq5_copy, tam5);
-    //====================================================
-    start = clock();
-    Insertion_Sort(seq5, tam5);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 5 com Insertion Sort: %f segundos\n", time_spent);
-    //====================================================
-    inverte(seq5, seq5_copy, tam5);
-    //====================================================
-    start = clock();
-    Quick_Sort(seq5, 0, tam5 - 1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de ordenacao da sequencia 5 com Quick Sort: %f segundos\n", time_spent);
-    printf("==============================================================================================================\n");
-    //============================================================================================================================
-    printf("Digite um numero para ser procurado na sequencia 1: ");
+    printf("=================================================================================================================================\n");
+    printf("Digite um numero (20 a 2.000.000) para ser procurado na sequencia 1: ");
     scanf("%d", &item1);
-    printf("Digite um numero para ser procurado na sequencia 2: ");
+    printf("Digite um numero (20 a 2.000.000) para ser procurado na sequencia 2: ");
     scanf("%d", &item2);
-    printf("Digite um numero para ser procurado na sequencia 3: ");
+    printf("Digite um numero (20 a 2.000.000) para ser procurado na sequencia 3: ");
     scanf("%d", &item3);
-    printf("Digite um numero para ser procurado na sequencia 4: ");
+    printf("Digite um numero (20 a 2.000.000) para ser procurado na sequencia 4: ");
     scanf("%d", &item4);
-    printf("Digite um numero para ser procurado na sequencia 5: ");
+    printf("Digite um numero (20 a 2.000.000) para ser procurado na sequencia 5: ");
     scanf("%d", &item5);
-    printf("==============================================================================================================\n");
-    //====================================================
-    start = clock();
-    indice = BuscaSequencial(seq1, tam1, item1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 1 com Busca Sequencial: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    //====================================================
-    start = clock();
-    indice = BuscaBinaria(seq1, tam1, item1);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 1 com Busca Binaria: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    printf("==============================================================================================================\n");
+    printf("=================================================================================================================================\n");
+    printf("||======================||=========================||=====================||==========================||=======================||\n");
     //============================================================================================================================
-    start = clock();
-    indice = BuscaSequencial(seq2, tam2, item2);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 2 com Busca Sequencial: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
+    printf("||        Bubble        ||        Insertion        ||        Quick        ||        Sequencial        ||        Binaria        ||\n");
+    printf("||======================||=========================||=====================||==========================||=======================||\n");
+    medeOrdenar(seq1, tam1, 1);
+    inverte(seq1, seq1_copy, tam1);
     //====================================================
-    start = clock();
-    indice = BuscaBinaria(seq2, tam2, item2);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 2 com Busca Binaria: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    printf("==============================================================================================================\n");
+    medeOrdenar(seq1, tam1, 2);
+    inverte(seq1, seq1_copy, tam1);
+    //====================================================
+    medeOrdenar(seq1, tam1, 3);
+    //====================================================
+    medeBusca(seq1, tam1, 1, item1);
+    medeBusca(seq1, tam1, 2, item1);
+    printf("\n||======================||=========================||=====================||==========================||=======================||\n");
     //============================================================================================================================
-    start = clock();
-    indice = BuscaSequencial(seq3, tam3, item3);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 3 com Busca Sequencial: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
+    medeOrdenar(seq2, tam2, 1);
+    inverte(seq2, seq2_copy, tam2);
     //====================================================
-    start = clock();
-    indice = BuscaBinaria(seq3, tam3, item3);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 3 com Busca Binaria: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    printf("==============================================================================================================\n");
+    medeOrdenar(seq2, tam2, 2);
+    inverte(seq2, seq2_copy, tam2);
+    //====================================================
+    medeOrdenar(seq2, tam2, 3);
+    //====================================================
+    medeBusca(seq2, tam2, 1, item2);
+    medeBusca(seq2, tam2, 2, item2);
+    printf("\n||======================||=========================||=====================||==========================||=======================||\n");
     //============================================================================================================================
-    start = clock();
-    indice = BuscaSequencial(seq4, tam4, item4);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 4 com Busca Sequencial: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
+    medeOrdenar(seq3, tam3, 1);
+    inverte(seq3, seq3_copy, tam3);
     //====================================================
-    start = clock();
-    indice = BuscaBinaria(seq4, tam4, item4);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 4 com Busca Binaria: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    printf("==============================================================================================================\n");
+    medeOrdenar(seq3, tam3, 2);
+    inverte(seq3, seq3_copy, tam3);
+    //====================================================
+    medeOrdenar(seq3, tam3, 3);
+    //====================================================
+    medeBusca(seq3, tam3, 1, item3);
+    medeBusca(seq3, tam3, 2, item3);
+    printf("\n||======================||=========================||=====================||==========================||=======================||\n");
     //============================================================================================================================
-    start = clock();
-    indice = BuscaSequencial(seq5, tam5, item5);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 5 com Busca Sequencial: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
+    medeOrdenar(seq4, tam4, 1);
+    inverte(seq4, seq4_copy, tam4);
     //====================================================
-    start = clock();
-    indice = BuscaBinaria(seq5, tam5, item5);
-    end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Tempo de busca na sequencia 5 com Busca Binaria: %f segundos\n", time_spent);
-    if (indice != -1)
-    {
-        printf("INDICE: %d\n", indice + 1);
-    }
-    printf("==============================================================================================================\n");
+    medeOrdenar(seq4, tam4, 2);
+    inverte(seq4, seq4_copy, tam4);
     //====================================================
-
-    free(seq1);
-    free(seq2);
-    free(seq3);
-    free(seq4);
-    free(seq5);
-    free(seq1_copy);
-    free(seq2_copy);
-    free(seq3_copy);
-    free(seq4_copy);
-    free(seq5_copy);
+    medeOrdenar(seq4, tam4, 3);
     //====================================================
-    return 0;
+    medeBusca(seq4, tam4, 1, item4);
+    medeBusca(seq4, tam4, 2, item4);
+    printf("\n||======================||=========================||=====================||==========================||=======================||\n");
+    //============================================================================================================================
+    medeOrdenar(seq5, tam5, 1);
+    inverte(seq5, seq5_copy, tam5);
+    //====================================================
+    medeOrdenar(seq5, tam5, 2);
+    inverte(seq5, seq5_copy, tam5);
+    //====================================================
+    medeOrdenar(seq5, tam5, 3);
+    //====================================================
+    medeBusca(seq5, tam5, 1, item5);
+    medeBusca(seq5, tam5, 2, item5);
+    printf("\n||======================||=========================||=====================||==========================||=======================||\n");
+    //====================================================
+        free(seq1);
+        free(seq2);
+        free(seq3);
+        free(seq4);
+        free(seq5);
+        free(seq1_copy);
+        free(seq2_copy);
+        free(seq3_copy);
+        free(seq4_copy);
+        free(seq5_copy);
+        //====================================================
+        return 0;
 }

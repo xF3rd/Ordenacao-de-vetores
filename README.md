@@ -5,7 +5,7 @@
 * Baixe a release
 * Baixe o docker desktop no site :https://www.docker.com/products/docker-desktop/
 * No terminal abra seu bash na pasta com o Dockerfile e o arquivo main.c
-* Execute o comando ```docker build -t nome_da_imagem``` para buildar sua imagem a partir do Dockerfile
+* Execute o comando ```docker build -t nome_da_imagem .``` para buildar sua imagem a partir do Dockerfile
 * Após terminar de executar o primeiro comando, execute o ```docker run -it nome_da_imagem``` para subir o container
 ## Integrantes 
 ### Fernando Bordin Correa 
